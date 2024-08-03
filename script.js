@@ -6,7 +6,7 @@ const iconDiv=document.querySelector('.icon')
 const temperatureDiv=document.querySelector('.temperature')
 const descriptionDiv=document.querySelector('.description')
 const detailsDiv=document.querySelector('.details')
-
+const cityDiv=document.querySelector('.city')
 
 form.addEventListener('submit',(e)=>{
     e.preventDefault()
@@ -26,6 +26,7 @@ async function getWeather(inputValue){
             `Humidity:${data.main.humidity}%`,
             `Wind:${data.wind.speed} m/s`
         ]
+        cityDiv.innerHTML=`<h1>${data.name}</h1>`
         iconDiv.innerHTML=`<img src="http://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon">`
         temperatureDiv.textContent=`${temperature}°C`
         let detailsNew=details.map((detail)=>`<div>${detail}</div>`).join('')
@@ -33,6 +34,7 @@ async function getWeather(inputValue){
         descriptionDiv.textContent=''
     }
     catch(error){
+        cityDiv.textContent=''
         iconDiv.textContent=''
         temperatureDiv.textContent=''
         detailsDiv.textContent=''
